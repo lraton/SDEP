@@ -1,9 +1,5 @@
 let app = require('express')();
 let http = require('http').Server(app);
-let io = require('socket.io')(http);
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
 const multer = require("multer");
 let mysql = require('mysql');
 let db = require('./db.js'); //dati database in un'altro file
