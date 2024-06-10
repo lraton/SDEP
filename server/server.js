@@ -1,6 +1,8 @@
 let app = require('express')();
 let http = require('http').Server(app);
+let io = require('socket.io')(http);
 const bodyParser = require('body-parser');
+const fs = require('fs');
 const path = require('path');
 const multer = require("multer");
 let mysql = require('mysql');
@@ -24,11 +26,21 @@ con.connect(function (err) {
 // for parsing multipart/form-data
 app.use(multer().any());
 
-app.post('', (req, res) => {
+app.post('/login', (req, res) => {
 
-    let titolo = req.body.title;
-    let descrizione = req.body.description;
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log('Username:', username);
+    console.log('Password:', password);
 
+    res.cookie('username', username);
+
+    //controllo sql se è un venditore o un cliente
+
+    res.cookie('tipo', 'cliente');
+    res.cookie('tipo', 'vendire');
+
+/*
     con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`) VALUES (?,?)", [titolo, descrizione], function (err) {
         if (err) throw err;
         return res.status(201).send(`
@@ -47,9 +59,12 @@ app.post('', (req, res) => {
           </body>
         </html>
       `);
-    });
 
-    console.log('body:', req.body);
+      
+    });*/
+
+    res.redirect('http://localhost/auto.html');
+    //console.log('body:', req.body);
 
 
 });
@@ -57,53 +72,13 @@ app.post('', (req, res) => {
 
 //Upload file
 
-app.post('', (req, res) => {
-
-    if (!req.body.title || !req.body.description || !req.body.token || !req.body.tutorial) {
-        return res.status(400).send('Please provide all required fields and files');
-    }
-
-    let titolo = req.body.title;
-    let descrizione = req.body.description;
-    let tutorial = req.body.tutorial;
-    let token = req.body.token;
-    let PathPresentazione = '/var/www/html/upload/file/';
-    let PathEsercizi = '/var/www/html/upload/file/';;
-
-    console.log('Title:', req.body.title);
-    console.log('Description:', req.body.description);
-    console.log('Token:', req.body.token);
-    console.log('Tutorial:', req.body.tutorial);
-    console.log('Files:', req.files);
-
-    //query token
-
-    // Save each file to a specified directory
-    req.files.forEach(file => {
-        const destinationDir = '/var/www/html/upload/file'; // Specify your destination directory here
-        const filePath = path.join(destinationDir, file.originalname);
-        if (file.fieldname == 'presentation') {
-            PathPresentazione = '/var/www/html/upload/file/' + file.originalname;
-        }
-        if (file.fieldname == 'exercise') {
-            PathPresentazione = '/var/www/html/upload/file/' + file.originalname;
-        }
-        // Save the file
-        fs.writeFile(filePath, file.buffer, (err) => {
-            if (err) {
-                console.error('Error saving file:', err);
-            } else {
-                console.log('File saved successfully:', file.originalname);
-            }
-        });
-    });
-
-    con.query("INSERT INTO `subtutorial` (`Titolo`, `Descrizione`, `PathPresentazione`, `PathEsercizi`, `tutorial`) VALUES (?,?,?,?,?)", [titolo, descrizione, PathPresentazione, PathEsercizi, tutorial], function (err) {
-        if (err) throw err;
-        return res.status(201).send('Caricato nel tutorial');
-    });
-
-    res.send('Files uploaded successfully!');
+app.post('/signin', (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let venditorecliente = req.body.venditorecliente;
+    console.log('Username:', username);
+    console.log('Password:', password);
+    console.log('venditorecliente:', venditorecliente);
 });
 
 

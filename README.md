@@ -7,3 +7,13 @@ Per vedere il log:
 
 Per stopparlo:
 `sudo docker-compose down`
+
+## To do
+[] Home
+[] Pagine dinamiche, autoi e ricambi
+[] fix footer
+[] database
+[] rest/post per auto
+[] rest/post per ricambi
+[] coockie sessione
+[] pagina upload
