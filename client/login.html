@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <title>SDEP</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>Vendita Auto e Ricambi</h1>
+    <p></p>
+  </div>
+
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="auto.html">Auto</a>
+    <a href="ricambi.html">Ricambi</a>
+    <a href="login.html" class="right active">Login</a>
+  </div>
+
+  <div class="row">
+    <div class="accesso-form">
+      <h1 class="titolo">Accedi</h1>
+      <form action="http://localhost:3000/login"  method="post">
+        <p class="nome">
+          <input name="username" type="text" class="accesso-input" id="username" placeholder="Username" />
+        </p>
+        <p class="password">
+          <input name="password" type="password" class="accesso-input" id="password" placeholder="Password" />
+        </p>
+        <input type="submit" value="Invia" class="accesso-invia" />
+      </form>
+    </div>
+
+    <div class="accesso-form">
+      <h1 class="titolo">Registrati</h1>
+      <form action="http://localhost:3000/signin"  method="post">
+        <p class="nome">
+          <input name="username" type="text" class="accesso-input" id="username" placeholder="Username" />
+        </p>
+        <p class="password">
+          <input name="password" type="password" class="accesso-input" id="password" placeholder="Password" />
+        </p>
+        <input type="radio" name="venditore-cliente" value="cliente">
+        <label for="cliente">Cliente</label>
+        <input type="radio" name="venditore-cliente" value="venditore">
+        <label for="venditore">Venditore</label><br><br>
+        <input type="submit" value="Invia" class="accesso-invia" />
+      </form>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h2>Footer</h2>
+  </div>
+
+</body>
+
+</html>
