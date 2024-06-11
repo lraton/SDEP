@@ -1,0 +1,47 @@
+[
+    {
+      "id": 1,
+      "marca": "Toyota",
+      "modello": "Corolla",
+      "descrizione": "Auto compatta con ottime prestazioni.",
+      "anno": 2019,
+      "kilometri": 25000,
+      "stato": "usata",
+      "prezzo": 15000,
+      "venditore": {
+        "username": "venditore1",
+        "clientevenditore": "venditore"
+      },
+      "venduta": 0
+    },
+    {
+      "id": 2,
+      "marca": "BMW",
+      "modello": "X5",
+      "descrizione": "SUV di lusso con interni eleganti.",
+      "anno": 2020,
+      "kilometri": 15000,
+      "stato": "nuova",
+      "prezzo": 50000,
+      "venditore": {
+        "username": "venditore2",
+        "clientevenditore": "cliente"
+      },
+      "venduta": 1
+    },
+    {
+      "id": 3,
+      "marca": "Fiat",
+      "modello": "500",
+      "descrizione": "Auto urbana economica e maneggevole.",
+      "anno": 2018,
+      "kilometri": 30000,
+      "stato": "usata",
+      "prezzo": 10000,
+      "venditore": {
+        "username": "venditore3",
+        "clientevenditore": "venditore"
+      },
+      "venduta": 0
+    }
+  ]
