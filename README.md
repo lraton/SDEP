@@ -9,12 +9,12 @@ Per stopparlo:
 `sudo docker-compose down`
 
 ## To do
-[ ] Home, Filippo
-[ ] Pagine dinamiche, autoi e ricambi, Filippo
-[ ] fix footer, Filippo
-[X] database
-[ ] rest/post per auto, Nicolo
-[ ] rest/post per ricambi, Nicolo
-[ ] coockie sessione, Nic/Fil
-[ ] pagina upload, Filippo
-[ ] Pagina uplaod lato server, Nicolo
+- [ ] Home, Filippo
+- [ ] Pagine dinamiche, autoi e ricambi, Filippo
+- [ ] fix footer, Filippo
+- [X] database
+- [ ] rest/post per auto, Nicolo
+- [ ] rest/post per ricambi, Nicolo
+- [ ] coockie sessione, Nic/Fil
+- [ ] pagina upload, Filippo
+- [ ] Pagina uplaod lato server, Nicolo
