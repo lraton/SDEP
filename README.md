@@ -12,7 +12,7 @@ Per stopparlo:
 [ ] Home, Filippo
 [ ] Pagine dinamiche, autoi e ricambi, Filippo
 [ ] fix footer, Filippo
-[ ] database
+[X] database
 [ ] rest/post per auto, Nicolo
 [ ] rest/post per ricambi, Nicolo
 [ ] coockie sessione, Nic/Fil
