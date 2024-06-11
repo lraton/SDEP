@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Fai una richiesta al server per ottenere i dati delle macchine in vendita
     fetch('http://localhost/json-example.json')
         .then(response => {
@@ -39,17 +39,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Imposta il contenuto HTML della macchina
             macchinaElement.innerHTML = macchinaHTML;
+            // Aggiungi il modulo di acquisto solo se il cookie 'tipo' è uguale a 'venditore' e la macchina non è stata venduta
+            if (document.cookie.includes('tipo=venditore') && macchina.venduta === 0) {
+                const buyForm = document.createElement('form');
+                buyForm.classList.add('buy-form');
+                buyForm.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Evita l'invio del modulo
+                    // Esegui qui la logica per inviare i dati al server
+                    const formData = new FormData(buyForm);
+                    const formDataObject = {};
+                    formData.forEach((value, key) => {
+                        formDataObject[key] = value;
+                    });
+                    console.log('Dati inviati al server:', formDataObject);
+                });
 
-            // Aggiungi il pulsante di acquisto solo se il cookie 'tipo' è uguale a 'venditore' e la macchina non è stata venduta
-            if (document.cookie.includes('tipo=venditore') && macchina.venduta === 0) { //da cambiare in cliente
                 const buyButton = document.createElement('button');
                 buyButton.textContent = 'Acquista';
                 buyButton.classList.add('buy-button');
-                buyButton.addEventListener('click', function() {
-                    // Aggiungi qui la logica per l'acquisto della macchina
-                    console.log('Acquisto della macchina:', macchina);
-                });
-                macchinaElement.appendChild(buyButton);
+                buyForm.appendChild(buyButton);
+
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'macchina_id'; // Nome del campo da inviare al server
+                hiddenInput.value = macchina.id; // Valore del campo (ID della macchina)
+                buyForm.appendChild(hiddenInput);
+
+                macchinaElement.appendChild(buyForm);
             }
 
             // Aggiungi la macchina al contenitore
