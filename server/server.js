@@ -97,13 +97,13 @@ app.get('/ricambi', (req, res) => {
   //restiruire un json con tutti i ricambi
 });
 
-app.get('/buy-macchina', (req, res) => {
+app.post('/buy-macchina', (req, res) => {
   console.log('body:', req.body);
   //prendere i dati dal form id macchina e nome cliente
   //inserire i dati nel database
 });
 
-app.get('/buy-ricambi', (req, res) => {
+app.post('/buy-ricambi', (req, res) => {
   //prendere i dati dal form id ricambi e nome cliente
   //inserire i dati nel database
 });
