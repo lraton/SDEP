@@ -39,31 +39,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Imposta il contenuto HTML della macchina
             macchinaElement.innerHTML = macchinaHTML;
+
             // Aggiungi il modulo di acquisto solo se il cookie 'tipo' è uguale a 'venditore' e la macchina non è stata venduta
             if (document.cookie.includes('tipo=venditore') && macchina.venduta === 0) {
                 const buyForm = document.createElement('form');
                 buyForm.classList.add('buy-form');
-                buyForm.addEventListener('submit', function (event) {
-                    event.preventDefault(); // Evita l'invio del modulo
-                    // Esegui qui la logica per inviare i dati al server
-                    const formData = new FormData(buyForm);
-                    const formDataObject = {};
-                    formData.forEach((value, key) => {
-                        formDataObject[key] = value;
-                    });
-                    console.log('Dati inviati al server:', formDataObject);
-                });
+                buyForm.action = 'http://localhost:3000/buy-macchina'; // Imposta l'azione del modulo
+                buyForm.method = 'post'; // Imposta il metodo del modulo
 
-                const buyButton = document.createElement('button');
-                buyButton.textContent = 'Acquista';
-                buyButton.classList.add('buy-button');
+                const hiddenInputId = document.createElement('input');
+                hiddenInputId.type = 'hidden';
+                hiddenInputId.name = 'macchina_id'; // Nome del campo da inviare al server
+                hiddenInputId.value = macchina.id; // Valore del campo (ID della macchina)
+                buyForm.appendChild(hiddenInputId);
+
+                const hiddenInputUsername = document.createElement('input');
+                hiddenInputUsername.type = 'hidden';
+                hiddenInputUsername.name = 'username'; // Nome del campo da inviare al server
+                hiddenInputUsername.value = getCookieValue('username'); // Valore del campo (Nome del cliente dal cookie)
+                buyForm.appendChild(hiddenInputUsername);
+
+                const buyButton = document.createElement('input');
+                buyButton.type = 'submit';
+                buyButton.value = 'Acquista';
+                buyButton.classList.add('invia');
                 buyForm.appendChild(buyButton);
-
-                const hiddenInput = document.createElement('input');
-                hiddenInput.type = 'hidden';
-                hiddenInput.name = 'macchina_id'; // Nome del campo da inviare al server
-                hiddenInput.value = macchina.id; // Valore del campo (ID della macchina)
-                buyForm.appendChild(hiddenInput);
 
                 macchinaElement.appendChild(buyForm);
             }
@@ -71,5 +71,21 @@ document.addEventListener('DOMContentLoaded', function () {
             // Aggiungi la macchina al contenitore
             container.appendChild(macchinaElement);
         });
+    }
+
+    function getCookieValue(cookieName) {
+        const name = cookieName + "=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+        for (let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(name) === 0) {
+                return cookie.substring(name.length, cookie.length);
+            }
+        }
+        return "";
     }
 });
