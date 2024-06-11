@@ -33,7 +33,7 @@ app.post('/login', (req, res) => {
   //controllo sql se è un venditore o un cliente
 
   res.cookie('tipo', 'cliente');
-  res.cookie('tipo', 'vendire');
+  res.cookie('tipo', 'venditore');
 
   /*
       con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`) VALUES (?,?)", [titolo, descrizione], function (err) {
@@ -74,8 +74,28 @@ app.post('/signin', (req, res) => {
   console.log('Username:', username);
   console.log('Password:', password);
   console.log('venditorecliente:', venditorecliente);
+
 });
 
+app.post('/upload-macchine', (req, res) => {
+  //prendere i dati dal form
+  //inserire i dati nel database
+});
+
+app.post('/upload-ricambi', (req, res) => {
+  //prendere i dati dal form
+  //inserire i dati nel database
+});
+
+app.get('/macchine', (req, res) => {
+  //sql per prendere tutte le macchine
+  //restiruire un json con tutte le macchine
+});
+
+app.get('/ricambi', (req, res) => {
+  //sql per prendere tutti i ricambi
+  //restiruire un json con tutti i ricambi
+});
 
 http.listen(3000, function () {
   console.log('listening on *:3000');
