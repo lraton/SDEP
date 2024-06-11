@@ -8,6 +8,11 @@ Per vedere il log:
 Per stopparlo:
 `sudo docker-compose down`
 
+## Caricare DB
+Aprire phpmyadmin e  creare un database `sdep`
+Fare un import del file `sdep.sql`
+
+
 ## To do
 - [ ] Home, Filippo
 - [ ] Pagine dinamiche, autoi e ricambi, Filippo
