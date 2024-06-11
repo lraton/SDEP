@@ -166,6 +166,31 @@ input[type=radio] {
     height: 2em;
 }
 
+.macchina {
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: var(--color-blu4);
+    color: var(--color-blu1);
+    position: relative; /* Per posizionare correttamente il pulsante di acquisto */
+}
+
+.buy-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: var(--color-blu2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background-color: var(--color-blu3);
+}
+
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {
