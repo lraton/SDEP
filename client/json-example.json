@@ -25,7 +25,7 @@
       "prezzo": 50000,
       "venditore": {
         "username": "venditore2",
-        "clientevenditore": "cliente"
+        "clientevenditore": "venditore"
       },
       "venduta": 1
     },
