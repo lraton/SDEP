@@ -14,12 +14,12 @@ Fare un import del file `sdep.sql`
 
 
 ## To do
-- [ ] Home, Filippo
-- [ ] Pagine dinamiche, autoi e ricambi, Filippo
-- [ ] fix footer, Filippo
+- [X] Home, Filippo
+- [X] Pagine dinamiche, autoi e ricambi, Filippo
+- [X] fix footer, Filippo
 - [X] database
 - [ ] rest/post per auto, Nicolo
 - [ ] rest/post per ricambi, Nicolo
 - [ ] coockie sessione, Nic/Fil
-- [ ] pagina upload, Filippo
+- [X] pagina upload, Filippo
 - [ ] Pagina uplaod lato server, Nicolo
