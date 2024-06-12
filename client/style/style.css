@@ -67,38 +67,58 @@ body {
 /* Column container */
 .row {
     display: -ms-flexbox;
-    /* IE10 */
     display: flex;
     -ms-flex-wrap: wrap;
-    /* IE10 */
     flex-wrap: wrap;
+    padding: 20px;
+    /* Aggiunto margine inferiore per separare i blocchi */
 }
 
-/* Create two unequal columns that sits next to each other */
-/* Sidebar/left column */
 .side {
-    -ms-flex: 30%;
-    /* IE10 */
     flex: 30%;
-    background-color: #f1f1f1;
     padding: 20px;
+    border-radius: 30px;
+    /* Cambiato il border-radius a 30px */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Main column */
+.side h2 {
+    color: var(--color-blu1);
+    margin-bottom: 15px;
+}
+
+.side p {
+    color: var(--color-blu1);
+    margin-bottom: 20px;
+}
+
 .main {
-    -ms-flex: 70%;
-    /* IE10 */
     flex: 70%;
-    background-color: white;
+    background-color: var(--color-blu5);
     padding: 20px;
+    border-radius: 30px;
+    /* Cambiato il border-radius a 30px */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Fake image, just for this example */
-.fakeimg {
-    background-color: #aaa;
-    width: 100%;
-    padding: 20px;
+.main h2 {
+    color: var(--color-blu1);
+    margin-bottom: 15px;
 }
+
+.main p {
+    color: var(--color-blu1);
+    margin-bottom: 20px;
+}
+
+.fakeimg {
+    width: 100%;
+    border-radius: 30px;
+    /* Cambiato il border-radius a 30px */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
 
 /* Footer */
 .footer {
@@ -155,11 +175,13 @@ textarea {
     filter: brightness(130%);
     transition: .5s ease;
 }
-.radio-inline{
+
+.radio-inline {
     display: inline;
     text-align: center;
     font-size: 1.25em;
 }
+
 input[type=radio] {
     border: 0px;
     width: 27%;
@@ -169,10 +191,11 @@ input[type=radio] {
 .macchina {
     border-radius: 10px;
     padding: 20px;
-    margin: 20px 0;
+    margin: 20px;
     background-color: var(--color-blu4);
     color: var(--color-blu1);
-    position: relative; /* Per posizionare correttamente il pulsante di acquisto */
+    position: relative;
+    /* Per posizionare correttamente il pulsante di acquisto */
 }
 
 .buy-button {

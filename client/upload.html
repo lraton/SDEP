@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>SDEP Upload</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="Script/script.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Vendita Auto e Ricambi</h1>
+        <p>Benvenuti nel nostro sito di vendita auto e ricambi</p>
+    </div>
+
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="auto.html">Auto</a>
+        <a href="ricambi.html">Ricambi</a>
+        <a href="upload.html" class="active upload-link">Upload</a>
+        <a href="login.html" class="right">Login</a>
+    </div>
+
+    <div class="row">
+        <div class="accesso-form">
+            <h1 class="titolo">Crea inserzione Auto</h1>
+            <form action="http://localhost:3000/upload-macchine" method="post">
+                Marca
+                <input name="marca" type="text" class="accesso-input" id="marca" placeholder="Fiat" required />
+                <br><br>
+                Modello
+                <input name="modello" type="text" class="accesso-input" id="modello" placeholder="Punto" required />
+                <br><br>
+                Descrizione
+                <input name="descrizione" type="text" class="accesso-input" id="descrizione" placeholder="Descrizione"
+                    required />
+                <br><br>
+                Anno:
+                <input id="anno" name="anno" type="number" class="accesso-input" min="1900" max="2099" step="1"
+                    value="2016" required />
+                <br><br>
+                KM:
+                <input id="kilometri" name="kilometri" type="number" class="accesso-input" min="0" max="5000000"
+                    step="1" value="35000" required />
+                <br><br>
+                <br><br>
+                <input type="radio" name="stato" value="Nuova" required>
+                <label for="nuova">Nuova</label>
+                <input type="radio" name="stato" value="Usata" required>
+                <label for="usata">Usata</label><br><br>
+                <br><br>
+                Prezzo:
+                <input id="prezzo" name="prezzo" type="number" class="accesso-input" min="0" step="1" value="25000"
+                    required />
+                <br><br>
+                <input type="submit" value="Invia" class="accesso-invia" />
+            </form>
+        </div>
+
+        <div class="accesso-form">
+            <h1 class="titolo">Crea inserzione Ricambi</h1>
+            <form action="http://localhost:3000/upload-ricambi" method="post">
+                Marca
+                <input name="marca" type="text" class="accesso-input" id="marca" placeholder="Fiat" required />
+                <br><br>
+                Modello
+                <input name="modello" type="text" class="accesso-input" id="modello" placeholder="Punto" required />
+                <br><br>
+                Descrizione
+                <input name="descrizione" type="text" class="accesso-input" id="descrizione" placeholder="Descrizione"
+                    required />
+                <br><br>
+                Anno:
+                <input id="anno" name="anno" type="number" class="accesso-input" min="1900" max="2099" step="1"
+                    value="2016" required />
+                <br><br>
+                <br><br>
+                <input type="radio" name="stato" value="Nuova" required>
+                <label for="nuova">Nuovo</label>
+                <input type="radio" name="stato" value="Usata" required>
+                <label for="usata">Usato</label><br><br>
+                <br><br>
+                Prezzo:
+                <input id="prezzo" name="prezzo" type="number" class="accesso-input" min="0" step="1" value="25000"
+                    required />
+                <br><br>
+                <input type="submit" value="Invia" class="accesso-invia" />
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h2>Contattaci</h2>
+        <p>Email: info@sdep.com</p>
+        <p>Telefono: 123-456-7890</p>
+        <p>Indirizzo: Via delle Auto, 123, 00100 Roma, Italia</p>
+    </div>
+
+</body>
+
+</html>

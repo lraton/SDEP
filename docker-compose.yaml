@@ -9,12 +9,12 @@ services:
     db:
         image: mysql:latest # use latest version of mysql
         container_name: db # add a name for the container
-        command: --default-authentication-plugin=mysql_native_password
         restart: unless-stopped
         environment:
             MYSQL_USER: 'user'
             MYSQL_PASSWORD: 'password'
             MYSQL_ROOT_PASSWORD: 'password'
+        command: --default-authentication-plugin=mysql_native_password
         volumes:
             - ./db:/var/lib/mysql
         expose:

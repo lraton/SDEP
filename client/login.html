@@ -2,30 +2,32 @@
 <html lang="it">
 
 <head>
-  <title>SDEP</title>
+  <title>SDEP Login</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style/style.css">
+  <script src="Script/script.js"></script>
 </head>
 
 <body>
 
   <div class="header">
     <h1>Vendita Auto e Ricambi</h1>
-    <p></p>
+    <p>Benvenuti nel nostro sito di vendita auto e ricambi</p>
   </div>
 
   <div class="navbar">
     <a href="index.html">Home</a>
     <a href="auto.html">Auto</a>
     <a href="ricambi.html">Ricambi</a>
+    <a href="upload.html" class="active upload-link">Upload</a>
     <a href="login.html" class="right active">Login</a>
   </div>
 
   <div class="row">
     <div class="accesso-form">
       <h1 class="titolo">Accedi</h1>
-      <form action="http://localhost:3000/login"  method="post">
+      <form action="http://localhost:3000/login" method="post">
         <p class="nome">
           <input name="username" type="text" class="accesso-input" id="username" placeholder="Username" />
         </p>
@@ -38,7 +40,7 @@
 
     <div class="accesso-form">
       <h1 class="titolo">Registrati</h1>
-      <form action="http://localhost:3000/signin"  method="post">
+      <form action="http://localhost:3000/signin" method="post">
         <p class="nome">
           <input name="username" type="text" class="accesso-input" id="username" placeholder="Username" />
         </p>
@@ -55,7 +57,10 @@
   </div>
 
   <div class="footer">
-    <h2>Footer</h2>
+    <h2>Contattaci</h2>
+    <p>Email: info@sdep.com</p>
+    <p>Telefono: 123-456-7890</p>
+    <p>Indirizzo: Via delle Auto, 123, 00100 Roma, Italia</p>
   </div>
 
 </body>

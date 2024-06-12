@@ -7,6 +7,7 @@ let db = require('./db.js'); //dati database in un'altro file
 let con;
 
 //mi connetto al database
+/*
 con = mysql.createConnection({
   host: db.host,
   user: db.user,
@@ -18,7 +19,7 @@ con.connect(function (err) {
   if (err) throw err;
   console.log("Connected to the database!");
 });
-
+*/
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -78,21 +79,25 @@ app.post('/signin', (req, res) => {
 });
 
 app.post('/upload-macchine', (req, res) => {
+  console.log('body:', req.body);
   //prendere i dati dal form
   //inserire i dati nel database
 });
 
 app.post('/upload-ricambi', (req, res) => {
+  console.log('body:', req.body);
   //prendere i dati dal form
   //inserire i dati nel database
 });
 
 app.get('/macchine', (req, res) => {
+  console.log('body:', req.body);
   //sql per prendere tutte le macchine
   //restiruire un json con tutte le macchine
 });
 
 app.get('/ricambi', (req, res) => {
+  console.log('body:', req.body);
   //sql per prendere tutti i ricambi
   //restiruire un json con tutti i ricambi
 });
@@ -104,6 +109,8 @@ app.post('/buy-macchina', (req, res) => {
 });
 
 app.post('/buy-ricambi', (req, res) => {
+
+  console.log('body:', req.body);
   //prendere i dati dal form id ricambi e nome cliente
   //inserire i dati nel database
 });

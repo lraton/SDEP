@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "marca": "Bosch",
+        "modello": "Alternatore",
+        "descrizione": "Alternatore nuovo per motori diesel.",
+        "stato": "nuovo",
+        "prezzo": 120,
+        "venduta": 0,
+        "venditore": {
+            "username": "venditore1"
+        }
+    },
+    {
+        "id": 2,
+        "marca": "Michelin",
+        "modello": "Pilot Sport 4",
+        "descrizione": "Pneumatici estivi ad alte prestazioni.",
+        "stato": "usato",
+        "prezzo": 200,
+        "venduta": 1,
+        "venditore": {
+            "username": "venditore2"
+        }
+    },
+    {
+        "id": 3,
+        "marca": "Brembo",
+        "modello": "Dischi Freno",
+        "descrizione": "Set di dischi freno anteriori.",
+        "stato": "nuovo",
+        "prezzo": 150,
+        "venduta": 0,
+        "venditore": {
+            "username": "venditore3"
+        }
+    }
+]

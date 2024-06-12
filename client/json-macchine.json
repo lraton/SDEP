@@ -9,8 +9,7 @@
       "stato": "usata",
       "prezzo": 15000,
       "venditore": {
-        "username": "venditore1",
-        "clientevenditore": "venditore"
+        "username": "venditore1"
       },
       "venduta": 0
     },
@@ -24,8 +23,7 @@
       "stato": "nuova",
       "prezzo": 50000,
       "venditore": {
-        "username": "venditore2",
-        "clientevenditore": "venditore"
+        "username": "venditore2"
       },
       "venduta": 1
     },
@@ -39,8 +37,7 @@
       "stato": "usata",
       "prezzo": 10000,
       "venditore": {
-        "username": "venditore3",
-        "clientevenditore": "venditore"
+        "username": "venditore3"
       },
       "venduta": 0
     }
