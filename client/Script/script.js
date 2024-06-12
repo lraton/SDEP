@@ -28,6 +28,10 @@ if (document.title === 'SDEP Auto') {
                 const macchinaElement = document.createElement('div');
                 macchinaElement.classList.add('macchina'); // Aggiungi la classe .macchina
 
+                if (macchina.venduta === 1) {
+                    macchinaElement.classList.add('venduta'); // Aggiungi la classe .venduta
+                }
+
                 // Costruisci il contenuto HTML della macchina
                 const macchinaHTML = `
                 <h2>${macchina.marca} ${macchina.modello}</h2>
@@ -65,6 +69,7 @@ if (document.title === 'SDEP Auto') {
                     buyButton.type = 'submit';
                     buyButton.value = 'Acquista';
                     buyButton.classList.add('invia');
+                    buyButton.classList.add('buy-button');
                     buyForm.appendChild(buyButton);
 
                     macchinaElement.appendChild(buyForm);
@@ -107,6 +112,10 @@ if (document.title === 'SDEP Ricambi') {
                 const ricambioElement = document.createElement('div');
                 ricambioElement.classList.add('macchina'); // Aggiungi la classe .macchina
 
+                if (ricambio.venduta === 1) {
+                    ricambioElement.classList.add('venduta'); // Aggiungi la classe .venduta
+                }
+
                 // Costruisci il contenuto HTML dei ricambi
                 const ricambioHTML = `
                 <h2>${ricambio.marca} ${ricambio.modello}</h2>
@@ -142,6 +151,7 @@ if (document.title === 'SDEP Ricambi') {
                     buyButton.type = 'submit';
                     buyButton.value = 'Acquista';
                     buyButton.classList.add('invia');
+                    buyButton.classList.add('buy-button');
                     buyForm.appendChild(buyButton);
 
                     ricambioElement.appendChild(buyForm);
