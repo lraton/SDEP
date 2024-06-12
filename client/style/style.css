@@ -198,6 +198,10 @@ input[type=radio] {
     /* Per posizionare correttamente il pulsante di acquisto */
 }
 
+.venduta{
+    background-color: gray;
+}
+
 .buy-button {
     position: absolute;
     bottom: 10px;
