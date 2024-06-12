@@ -7,7 +7,7 @@ let db = require('./db.js'); //dati database in un'altro file
 let con;
 
 //mi connetto al database
-/*
+
 con = mysql.createConnection({
   host: db.host,
   user: db.user,
@@ -19,7 +19,7 @@ con.connect(function (err) {
   if (err) throw err;
   console.log("Connected to the database!");
 });
-*/
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
