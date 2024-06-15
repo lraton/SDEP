@@ -6,7 +6,7 @@ Per vedere il log:
 `sudo docker-compose logs --follow`
 
 Per stopparlo:
-`sudo docker-compose down`
+`sudo docker-compose down -v`
 
 ## Caricare DB
 Aprire phpmyadmin e  creare un database `sdep`

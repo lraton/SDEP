@@ -2,19 +2,20 @@ services:
 
     web:
         image: nginx:latest
+        container_name: "web_SDEP"
         volumes:
             - ./client:/usr/share/nginx/html
         ports:
             - "80:80"
+            
     db:
-        image: mysql:latest # use latest version of mysql
-        container_name: db # add a name for the container
-        restart: unless-stopped
+        image: mariadb:latest
+        container_name: "db_SDEP"
+        restart: always
         environment:
             MYSQL_USER: 'user'
             MYSQL_PASSWORD: 'password'
             MYSQL_ROOT_PASSWORD: 'password'
-        command: --default-authentication-plugin=mysql_native_password
         volumes:
             - ./db:/var/lib/mysql
         expose:
@@ -22,17 +23,18 @@ services:
         depends_on:
             - "web"
 
-    phpmyadmin:
-        image: phpmyadmin:latest
+    adminer:
+        image: adminer
+        container_name: "adminer_SDEP"
         restart: always
         ports:
-            - 8082:80
+        - 8080:8080
         depends_on:
             - "db"
 
     node:
         image: "node:latest"
-        container_name: "node"
+        container_name: "node_SDEP"
         user: "node"
         restart: unless-stopped
         working_dir: /home/node/app
@@ -46,5 +48,5 @@ services:
         expose:
         - "3000"
         depends_on:
-        - "db"
+        - "adminer"
         command: sh -c "npm install && npm start"
