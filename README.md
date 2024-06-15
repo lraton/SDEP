@@ -9,8 +9,7 @@ Per stopparlo:
 `sudo docker-compose down -v`
 
 ## Caricare DB
-Aprire phpmyadmin e  creare un database `sdep`
-Fare un import del file `sdep.sql`
+Fare un import del file `sdep_adminer.sql`
 
 
 ## To do
