@@ -25,11 +25,31 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post('/login', (req, res) => {
-  const { username, password } = req.body;
+  //const { username, password } = req.body;
+  let username = req.body.username;
+  let password = req.body.password;
   console.log('Username:', username);
   console.log('Password:', password);
 
   res.cookie('username', username);
+ 
+
+
+  /*
+  // controllo se l'utente è presente nel database
+  try{
+    const query = con.query('SELECT * FROM user WHERE username = $1', [username]);
+    const user = query.rows[0];
+    console.log(user);
+
+    if (!user) {
+      console.log('Hai sbagliato le tue credenziali')
+    }
+  } catch (error) {
+    console.error('Errore di login', error);
+    res.status(500).send({status : "internal error"});
+  }
+  */
 
   //controllo sql se è un venditore o un cliente
 
@@ -69,6 +89,7 @@ app.post('/login', (req, res) => {
 //Upload file
 
 app.post('/signin', (req, res) => {
+
   let username = req.body.username;
   let password = req.body.password;
   let venditorecliente = req.body.venditorecliente;
@@ -76,12 +97,46 @@ app.post('/signin', (req, res) => {
   console.log('Password:', password);
   console.log('venditorecliente:', venditorecliente);
 
+
+
+  /*
+  // Query al db per controllo utente già esistente
+  if(!username) {
+    return null;
+  }
+  
+  const result = con.query('SELECT * FROM user WHERE username = $1', [username]);
+  const user = result.rows[0];
+  if(user) {
+    console.log('Utente esiste gia');
+  }
+  
+  else {
+    console.log('utente nuovo');
+  }
+  */
 });
 
 app.post('/upload-macchine', (req, res) => {
   console.log('body:', req.body);
   //prendere i dati dal form
+
+  let marca = req.body.marca;
+  let modello = req.body.modello;
+  let descrizione = req.body.descrizione;
+  let anno = req.body.anno;
+  let kilometri = req.body.kilometri;
+  let prezzo = req.body.prezzo;
+  // prendere lo stato della nuova macchina
+  // prendere il venditore (username)
+  // ottenere l'id della nuova macchina
+
+  
   //inserire i dati nel database
+  // manca il campo id
+  con.query('INSERT INTO macchine (marca, modello, descrizione, anno, kilometri, stato, prezzo, venditore, venduta) VALUES ($1, $2, $3, $4, $5, $6)', [marca, modello, descrizione, anno, kilometri, stato])
+
+
 });
 
 app.post('/upload-ricambi', (req, res) => {
