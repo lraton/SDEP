@@ -2,7 +2,7 @@
 if (document.title === 'SDEP Auto') {
     document.addEventListener('DOMContentLoaded', function () {
         // Fai una richiesta al server per ottenere i dati delle macchine in vendita
-        fetch('http://localhost/json-macchine.json')
+        fetch('http://localhost:3000/macchine')
             .then(response => {
                 // Verifica se la risposta del server è ok
                 if (!response.ok) {
@@ -47,7 +47,7 @@ if (document.title === 'SDEP Auto') {
                 macchinaElement.innerHTML = macchinaHTML;
 
                 // Aggiungi il modulo di acquisto solo se il cookie 'tipo' è uguale a 'venditore' e la macchina non è stata venduta
-                if (document.cookie.includes('tipo=venditore') && macchina.venduta === 0) {
+                if (document.cookie.includes('tipo=cliente') && macchina.venduta === 0) {
                     const buyForm = document.createElement('form');
                     buyForm.classList.add('buy-form');
                     buyForm.action = 'http://localhost:3000/buy-macchina'; // Imposta l'azione del modulo
@@ -86,7 +86,7 @@ if (document.title === 'SDEP Auto') {
 if (document.title === 'SDEP Ricambi') {
     document.addEventListener('DOMContentLoaded', function () {
         // Fai una richiesta al server per ottenere i dati dei ricambi in vendita
-        fetch('http://localhost/json-ricambi.json')
+        fetch('http://localhost:3000/ricambi')
             .then(response => {
                 // Verifica se la risposta del server è ok
                 if (!response.ok) {
@@ -129,7 +129,7 @@ if (document.title === 'SDEP Ricambi') {
                 ricambioElement.innerHTML = ricambioHTML;
 
                 // Aggiungi il modulo di acquisto solo se il cookie 'tipo' è uguale a 'venditore' e il rcambio non è stata venduta
-                if (document.cookie.includes('tipo=venditore') && ricambio.venduta === 0) {
+                if (document.cookie.includes('tipo=cliente') && ricambio.venduta === 0) {
                     const buyForm = document.createElement('form');
                     buyForm.classList.add('buy-form');
                     buyForm.action = 'http://localhost:3000/buy-ricambi'; // Imposta l'azione del modulo

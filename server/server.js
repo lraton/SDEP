@@ -3,6 +3,8 @@ let app = express();
 let http = require('http').Server(app);
 let mysql = require('mysql');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 let db = require('./db.js'); //dati database in un'altro file
 let con;
 
@@ -20,68 +22,72 @@ con.connect(function (err) {
   console.log("Connected to the database!");
 });
 
-
+app.use(cors());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post('/login', (req, res) => {
-  //const { username, password } = req.body;
+  console.log('body:', req.body);
+
+  res.clearCookie('username');
+  res.clearCookie('tipo');
+
   let username = req.body.username;
   let password = req.body.password;
   console.log('Username:', username);
   console.log('Password:', password);
 
-  res.cookie('username', username);
- 
-
-
-  /*
-  // controllo se l'utente è presente nel database
-  try{
-    const query = con.query('SELECT * FROM user WHERE username = $1', [username]);
-    const user = query.rows[0];
-    console.log(user);
-
-    if (!user) {
-      console.log('Hai sbagliato le tue credenziali')
+  con.query('SELECT username, password, clientevenditore FROM user WHERE username = ?', [username], function (err, results) {
+    if (err) {
+      console.error('Errore durante la selezione del nome nel database', err);
+      return res.status(500).send('Errore interno del server');
     }
-  } catch (error) {
-    console.error('Errore di login', error);
-    res.status(500).send({status : "internal error"});
-  }
-  */
 
-  //controllo sql se è un venditore o un cliente
+    if (results.length === 0) {
+      // Utente non trovato
+      return res.status(400).send(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script type="text/javascript">
+              alert('Nome utente non valido');
+              window.location.href = 'http://localhost/login.html';
+            </script>
+          </head>
+          <body></body>
+        </html>
+      `);
+    }
 
-  res.cookie('tipo', 'cliente');
-  res.cookie('tipo', 'venditore');
+    let user = results[0];
+    if (user.password !== password) {
+      // Password non corrisponde
+      return res.status(400).send(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script type="text/javascript">
+              alert('Password non valida');
+              window.location.href = 'http://localhost/login.html';
+            </script>
+          </head>
+          <body></body>
+        </html>
+      `);
+    }
 
-  /*
-      con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`) VALUES (?,?)", [titolo, descrizione], function (err) {
-          if (err) throw err;
-          return res.status(201).send(`
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <script type="text/javascript">
-                setTimeout(function() {
-                  window.location.href = 'http://localhost/upload/';
-                }, 2000);
-              </script>
-            </head>
-            <body>
-            <h2>Tutorial created successfully</h2>
-              <p>Redirecting in 2 seconds...</p>
-            </body>
-          </html>
-        `);
-  
-        
-      });*/
+    // Login corretto, impostare i cookie
+    res.cookie('username', username);
+    if (user.clientevenditore === 'venditore') {
+      res.cookie('tipo', 'venditore');
+    } else {
+      res.cookie('tipo', 'cliente');
+    }
 
-  res.redirect('http://localhost/auto.html');
-  console.log('body:', req.body);
-
+    // Redirect alla pagina principale
+    res.status(201).redirect('http://localhost/auto.html');
+  });
 
 });
 
@@ -90,6 +96,9 @@ app.post('/login', (req, res) => {
 
 app.post('/signin', (req, res) => {
 
+  res.clearCookie('username');
+  res.clearCookie('tipo');
+
   let username = req.body.username;
   let password = req.body.password;
   let venditorecliente = req.body.venditorecliente;
@@ -97,24 +106,49 @@ app.post('/signin', (req, res) => {
   console.log('Password:', password);
   console.log('venditorecliente:', venditorecliente);
 
+  con.query('SELECT username FROM user WHERE username = ?', [username], function (err, results) {
+    if (err) {
+      console.error('Errore durante la selezione del nome nel database', err);
+      return res.status(500).send('Errore interno del server');
+    }
 
+    if (results.length === 0) {
+      // Utente non trovato
+      con.query('INSERT INTO user (username, password, clientevenditore) VALUES (?, ?, ?)',
+        [username, password, venditorecliente], function (err) {
+          if (err) {
+            console.error('Errore durante l\'inserimento nel database', err);
+            return res.status(500).send('Errore interno del server');
+          }
 
-  /*
-  // Query al db per controllo utente già esistente
-  if(!username) {
-    return null;
-  }
-  
-  const result = con.query('SELECT * FROM user WHERE username = $1', [username]);
-  const user = result.rows[0];
-  if(user) {
-    console.log('Utente esiste gia');
-  }
-  
-  else {
-    console.log('utente nuovo');
-  }
-  */
+          // Login corretto, impostare i cookie
+          res.cookie('username', username);
+          if (venditorecliente === 'venditore') {
+            res.cookie('tipo', 'venditore');
+          } else {
+            res.cookie('tipo', 'cliente');
+          }
+
+          // Redirect alla pagina principale
+          res.status(201).redirect('http://localhost/auto.html');
+        });
+
+    } else {
+      return res.status(400).send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script type="text/javascript">
+            alert('Utente già esistente');
+            window.location.href = 'http://localhost/login.html';
+          </script>
+        </head>
+        <body></body>
+      </html>
+    `);
+    }
+  });
+
 });
 
 app.post('/upload-macchine', (req, res) => {
@@ -127,47 +161,235 @@ app.post('/upload-macchine', (req, res) => {
   let anno = req.body.anno;
   let kilometri = req.body.kilometri;
   let prezzo = req.body.prezzo;
-  // prendere lo stato della nuova macchina
-  // prendere il venditore (username)
-  // ottenere l'id della nuova macchina
+  let stato = req.body.stato;
+  let venditore = req.cookies.username;
+  if (!venditore) {
+    return res.status(400).send('Venditore non trovato nei cookie');
+  }
 
-  
-  //inserire i dati nel database
-  // manca il campo id
-  con.query('INSERT INTO macchine (marca, modello, descrizione, anno, kilometri, stato, prezzo, venditore, venduta) VALUES ($1, $2, $3, $4, $5, $6)', [marca, modello, descrizione, anno, kilometri, stato])
+  // Inserire i dati nel database
+  con.query('INSERT INTO macchine (marca, modello, descrizione, anno, kilometri, stato, prezzo, venditore, venduta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    [marca, modello, descrizione, anno, kilometri, stato, prezzo, venditore, 0], function (err) {
+      if (err) {
+        console.error('Errore durante l\'inserimento nel database', err);
+        return res.status(500).send('Errore interno del server');
+      }
 
+      res.status(201).redirect('http://localhost/auto.html');
+    });
 
 });
 
 app.post('/upload-ricambi', (req, res) => {
   console.log('body:', req.body);
   //prendere i dati dal form
-  //inserire i dati nel database
+  let marca = req.body.marca;
+  let modello = req.body.modello;
+  let descrizione = req.body.descrizione;
+  let prezzo = req.body.prezzo;
+  let stato = req.body.stato;
+  let venditore = req.cookies.username;
+  if (!venditore) {
+    return res.status(400).send('Venditore non trovato nei cookie');
+  }
+
+  // Inserire i dati nel database
+  con.query('INSERT INTO ricambi (marca, modello, descrizione, stato, prezzo, venditore, venduta) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [marca, modello, descrizione, stato, prezzo, venditore, 0], function (err) {
+      if (err) {
+        console.error('Errore durante l\'inserimento nel database', err);
+        return res.status(500).send('Errore interno del server');
+      }
+
+      res.status(201).redirect('http://localhost/ricambi.html');
+    });
 });
 
 app.get('/macchine', (req, res) => {
-  console.log('body:', req.body);
-  //sql per prendere tutte le macchine
-  //restiruire un json con tutte le macchine
+  const sql = `
+    SELECT m.id, m.marca, m.modello, m.descrizione, m.anno, m.kilometri, m.stato, m.prezzo, m.venduta, v.username AS venditore_username 
+    FROM macchine m 
+    JOIN user v ON m.venditore = v.username
+  `;
+
+  con.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching macchine:', err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    const macchine = results.map(row => ({
+      id: row.id,
+      marca: row.marca,
+      modello: row.modello,
+      descrizione: row.descrizione,
+      anno: row.anno,
+      kilometri: row.kilometri,
+      stato: row.stato,
+      prezzo: row.prezzo,
+      venduta: row.venduta,
+      venditore: {
+        username: row.venditore_username
+      }
+    }));
+
+    res.json(macchine);
+  });
 });
 
 app.get('/ricambi', (req, res) => {
-  console.log('body:', req.body);
-  //sql per prendere tutti i ricambi
-  //restiruire un json con tutti i ricambi
+  const sql = `
+    SELECT r.id, r.marca, r.modello, r.descrizione, r.stato, r.prezzo, r.venduta, v.username AS venditore_username 
+    FROM ricambi r 
+    JOIN user v ON r.venditore = v.username
+  `;
+
+  con.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching ricambi:', err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    const ricambi = results.map(row => ({
+      id: row.id,
+      marca: row.marca,
+      modello: row.modello,
+      descrizione: row.descrizione,
+      stato: row.stato,
+      prezzo: row.prezzo,
+      venduta: row.venduta,
+      venditore: {
+        username: row.venditore_username
+      }
+    }));
+
+    res.json(ricambi);
+  });
 });
 
 app.post('/buy-macchina', (req, res) => {
   console.log('body:', req.body);
   //prendere i dati dal form id macchina e nome cliente
   //inserire i dati nel database
+  let macchina = req.body.macchina_id;
+  let cliente = req.body.username;
+  let venditore;
+
+  con.query('SELECT venditore FROM macchine where id=?', [macchina], function (err, results) {
+    if (err) {
+      console.error('Errore durante la ricerca nel database', err);
+      return res.status(500).send('Errore interno del server');
+    }
+    venditore = results[0].venditore;
+
+    con.query('INSERT INTO transazioni (venditore, cliente, `id-macchine-vendita`) VALUES (?, ?, ?)',
+      [venditore, cliente, macchina], function (err) {
+        if (err) {
+          console.error('Errore durante l\'inserimento nel database', err);
+          return res.status(500).send('Errore interno del server');
+        }
+
+        con.query('UPDATE macchine SET venduta=1 WHERE id=?', [macchina], function (err) {
+          if (err) {
+            console.error('Errore durante l\'aggiornamento nel database', err);
+            return res.status(500).send('Errore interno del server');
+          }
+          res.status(201).redirect('http://localhost/auto.html');
+        });
+
+      });
+
+  });
+
 });
 
 app.post('/buy-ricambi', (req, res) => {
-
   console.log('body:', req.body);
-  //prendere i dati dal form id ricambi e nome cliente
+  //prendere i dati dal form id macchina e nome cliente
   //inserire i dati nel database
+  let ricambio = req.body.ricambi_id;
+  let cliente = req.body.username;
+  let venditore;
+
+  con.query('SELECT venditore FROM ricambi where id=?', [ricambio], function (err, results) {
+    if (err) {
+      console.error('Errore durante la ricerca nel database', err);
+      return res.status(500).send('Errore interno del server');
+    }
+    venditore = results[0].venditore;
+
+    con.query('INSERT INTO transazioni (venditore, cliente, `id-ricambi-vendita`) VALUES (?, ?, ?)',
+      [venditore, cliente, ricambio], function (err) {
+        if (err) {
+          console.error('Errore durante l\'inserimento nel database', err);
+          return res.status(500).send('Errore interno del server');
+        }
+
+        con.query('UPDATE ricambi SET venduta=1 WHERE id=?', [ricambio], function (err) {
+          if (err) {
+            console.error('Errore durante l\'aggiornamento nel database', err);
+            return res.status(500).send('Errore interno del server');
+          }
+          res.status(201).redirect('http://localhost/ricambi.html');
+        });
+
+      });
+
+  });
+});
+
+app.get('/transazioni', (req, res) => {
+  const username = req.cookies.username; // Assume che il cookie username sia stato impostato correttamente durante il login
+
+  // Query SQL per recuperare le transazioni dell'utente come venditore o cliente
+  const sql = `
+    SELECT t.id, t.venditore, t.cliente, t.\`id-macchine-vendita\`, t.\`id-ricambi-vendita\`, 
+           m.marca AS marca_macchina, m.modello AS modello_macchina, m.descrizione AS descrizione_macchina,
+           r.marca AS marca_ricambio, r.modello AS modello_ricambio, r.descrizione AS descrizione_ricambio,
+           m.stato AS stato_macchina, r.stato AS stato_ricambio
+    FROM transazioni t
+    LEFT JOIN macchine m ON t.\`id-macchine-vendita\` = m.id
+    LEFT JOIN ricambi r ON t.\`id-ricambi-vendita\` = r.id
+    WHERE t.venditore = ? OR t.cliente = ?
+  `;
+
+  con.query(sql, [username, username], (err, results) => {
+    if (err) {
+      console.error('Errore durante il recupero delle transazioni:', err);
+      return res.status(500).send('Errore interno del server');
+    }
+
+    const transazioni = results.map(row => {
+      // Determina se la transazione è relativa a una macchina o a un ricambio
+      const isMacchina = row.marca_macchina !== null;
+      const isRicambio = row.marca_ricambio !== null;
+
+      // Costruisci l'oggetto transazione con i dati rilevanti
+      const transazione = {
+        id: row.id,
+        venditore: row.venditore,
+        cliente: row.cliente,
+        macchina: {
+          id: row['id-macchine-vendita'],
+          marca: isMacchina ? row.marca_macchina : null,
+          modello: isMacchina ? row.modello_macchina : null,
+          descrizione: isMacchina ? row.descrizione_macchina : null,
+          stato: isMacchina ? row.stato_macchina : null,
+        },
+        ricambio: {
+          id: row['id-ricambi-vendita'],
+          marca: isRicambio ? row.marca_ricambio : null,
+          modello: isRicambio ? row.modello_ricambio : null,
+          descrizione: isRicambio ? row.descrizione_ricambio : null,
+          stato: isRicambio ? row.stato_ricambio : null,
+        }
+      };
+
+      return transazione;
+    });
+
+    res.json(transazioni);
+  });
 });
 
 http.listen(3000, function () {
