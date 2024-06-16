@@ -325,3 +325,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Check if this cookie is the one we are looking for
+        if (cookie.startsWith(name + '=')) {
+            // Return the value of the cookie
+            return cookie.substring(name.length + 1);
+        }
+    }
+    // If cookie is not found, return null or handle as needed
+    return null;
+}

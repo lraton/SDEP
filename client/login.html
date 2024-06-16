@@ -5,63 +5,67 @@
   <title>SDEP Login</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style/style.css">
-  <script src="Script/script.js"></script>
+  <link rel="stylesheet" href="style/style.css"> <!-- Collegamento al foglio di stile CSS -->
+  <script src="Script/script.js"></script> <!-- Collegamento allo script JavaScript -->
 </head>
 
 <body>
 
   <div class="header">
-    <h1>Vendita Auto e Ricambi</h1>
-    <p>Benvenuti nel nostro sito di vendita auto e ricambi</p>
+    <h1>Vendita Auto e Ricambi</h1> <!-- Intestazione del sito -->
+    <p>Benvenuti nel nostro sito di vendita auto e ricambi</p> <!-- Descrizione breve -->
   </div>
 
   <div class="navbar">
-    <a href="index.html">Home</a>
-    <a href="auto.html">Auto</a>
-    <a href="ricambi.html">Ricambi</a>
-    <a href="upload.html" class="upload-link">Upload</a>
-    <a href="transazioni.html" class="transazioni">Transazioni</a>
-    <a href="login.html" class="right active" id="loginLink">Login</a>
+    <a href="index.html">Home</a> <!-- Link alla pagina Home -->
+    <a href="auto.html">Auto</a> <!-- Link alla pagina Auto -->
+    <a href="ricambi.html">Ricambi</a> <!-- Link alla pagina Ricambi -->
+    <a href="upload.html" class="upload-link">Upload</a> <!-- Link alla pagina di Upload -->
+    <a href="transazioni.html" class="transazioni">Transazioni</a> <!-- Link alla pagina Transazioni -->
+    <a href="login.html" class="right active" id="loginLink">Login</a> <!-- Link alla pagina di Login, attivo -->
   </div>
 
   <div class="row">
     <div class="accesso-form">
-      <h1 class="titolo">Accedi</h1>
-      <form action="http://localhost:3000/login" method="post">
+      <h1 class="titolo">Accedi</h1> <!-- Titolo sezione Accedi -->
+      <form action="http://localhost:3000/login" method="post"> <!-- Form per il login -->
         <p class="nome">
           <input name="username" type="text" class="accesso-input" id="username" placeholder="Username" />
+          <!-- Campo input per l'username -->
         </p>
         <p class="password">
           <input name="password" type="password" class="accesso-input" id="password" placeholder="Password" />
+          <!-- Campo input per la password -->
         </p>
-        <input type="submit" value="Invia" class="accesso-invia" />
+        <input type="submit" value="Invia" class="accesso-invia" /> <!-- Pulsante di invio del form -->
       </form>
     </div>
 
     <div class="accesso-form">
-      <h1 class="titolo">Registrati</h1>
-      <form action="http://localhost:3000/signin" method="post">
+      <h1 class="titolo">Registrati</h1> <!-- Titolo sezione Registrati -->
+      <form action="http://localhost:3000/signin" method="post"> <!-- Form per la registrazione -->
         <p class="nome">
           <input name="username" type="text" class="accesso-input" id="username" placeholder="Username" />
+          <!-- Campo input per l'username -->
         </p>
         <p class="password">
           <input name="password" type="password" class="accesso-input" id="password" placeholder="Password" />
+          <!-- Campo input per la password -->
         </p>
-        <input type="radio" name="venditorecliente" value="cliente">
+        <input type="radio" name="venditorecliente" value="cliente"> <!-- Selezione del tipo di utente: cliente -->
         <label for="cliente">Cliente</label>
-        <input type="radio" name="venditorecliente" value="venditore">
+        <input type="radio" name="venditorecliente" value="venditore"> <!-- Selezione del tipo di utente: venditore -->
         <label for="venditore">Venditore</label><br><br>
-        <input type="submit" value="Invia" class="accesso-invia" />
+        <input type="submit" value="Invia" class="accesso-invia" /> <!-- Pulsante di invio del form -->
       </form>
     </div>
   </div>
 
   <div class="footer">
-    <h2>Contattaci</h2>
-    <p>Email: info@sdep.com</p>
-    <p>Telefono: 123-456-7890</p>
-    <p>Indirizzo: Via delle Auto, 123, 00100 Roma, Italia</p>
+    <h2>Contattaci</h2> <!-- Titolo sezione Contattaci -->
+    <p>Email: info@sdep.com</p> <!-- Email di contatto -->
+    <p>Telefono: 123-456-7890</p> <!-- Numero di telefono -->
+    <p>Indirizzo: Via delle Auto, 123, 00100 Roma, Italia</p> <!-- Indirizzo della sede -->
   </div>
 
 </body>

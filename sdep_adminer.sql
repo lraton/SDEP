@@ -28,8 +28,9 @@ CREATE TABLE `macchine` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 INSERT INTO `macchine` (`id`, `marca`, `modello`, `descrizione`, `anno`, `kilometri`, `stato`, `prezzo`, `venditore`, `venduta`) VALUES
-(1,	'FIAT',	'Punto',	'Bellissima punto rosa shock in vendita',	1995,	450000,	'nuova',	25000,	'antonio',	1)
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `marca` = VALUES(`marca`), `modello` = VALUES(`modello`), `descrizione` = VALUES(`descrizione`), `anno` = VALUES(`anno`), `kilometri` = VALUES(`kilometri`), `stato` = VALUES(`stato`), `prezzo` = VALUES(`prezzo`), `venditore` = VALUES(`venditore`), `venduta` = VALUES(`venduta`);
+(1,	'FIAT',	'Punto',	'Bellissima punto rosa shock in vendita',	1995,	450000,	'nuova',	25000,	'antonio',	1),
+(2,	'Fiat',	'Panda',	'Bellissima pandalmare',	2016,	350000,	'Nuova',	50000,	'antonio',	1),
+(3,	'BMW',	'X5',	'Bellissima',	2016,	35000,	'Usata',	25000,	'antonio',	0);
 
 DROP TABLE IF EXISTS `ricambi`;
 CREATE TABLE `ricambi` (
@@ -47,8 +48,8 @@ CREATE TABLE `ricambi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 INSERT INTO `ricambi` (`id`, `marca`, `modello`, `descrizione`, `stato`, `prezzo`, `venduta`, `venditore`) VALUES
-(1,	'ALFA ROMEO',	'GIulietta',	'è un tubo',	'usato',	500,	0,	'antonio')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `marca` = VALUES(`marca`), `modello` = VALUES(`modello`), `descrizione` = VALUES(`descrizione`), `stato` = VALUES(`stato`), `prezzo` = VALUES(`prezzo`), `venduta` = VALUES(`venduta`), `venditore` = VALUES(`venditore`);
+(1,	'ALFA ROMEO',	'GIulietta',	'è un tubo',	'usato',	500,	1,	'antonio'),
+(2,	'Alfa',	'Stelvio',	'è un pezzo di fero',	'Nuova',	436,	0,	'antonio');
 
 DROP TABLE IF EXISTS `transazioni`;
 CREATE TABLE `transazioni` (
@@ -69,8 +70,9 @@ CREATE TABLE `transazioni` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 INSERT INTO `transazioni` (`id`, `venditore`, `cliente`, `id-macchine-vendita`, `id-ricambi-vendita`) VALUES
-(1,	'antonio',	'mario',	1,	NULL)
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `venditore` = VALUES(`venditore`), `cliente` = VALUES(`cliente`), `id-macchine-vendita` = VALUES(`id-macchine-vendita`), `id-ricambi-vendita` = VALUES(`id-ricambi-vendita`);
+(1,	'antonio',	'mario',	1,	NULL),
+(4,	'antonio',	'mario',	2,	NULL),
+(5,	'antonio',	'mario',	NULL,	1);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -82,7 +84,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`username`, `password`, `clientevenditore`) VALUES
 ('antonio',	'antonio',	'venditore'),
-('mario',	'mario',	'cliente')
-ON DUPLICATE KEY UPDATE `username` = VALUES(`username`), `password` = VALUES(`password`), `clientevenditore` = VALUES(`clientevenditore`);
+('filippo',	'filippo',	'cliente'),
+('mario',	'mario',	'cliente'),
+('nicolo',	'nicolo',	'venditore');
 
--- 2024-06-15 18:06:37
+-- 2024-06-16 17:58:59

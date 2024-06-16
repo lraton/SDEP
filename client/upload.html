@@ -2,98 +2,104 @@
 <html lang="it">
 
 <head>
-    <title>SDEP Upload</title>
-    <meta charset="UTF-8">
+    <title>SDEP Upload</title> <!-- Titolo della pagina -->
+    <meta charset="UTF-8"> <!-- Codifica dei caratteri UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style/style.css">
-    <script src="Script/script.js"></script>
+    <!-- Impostazioni per la visualizzazione responsive -->
+    <link rel="stylesheet" href="style/style.css"> <!-- Collegamento al foglio di stile CSS -->
+    <script src="Script/script.js"></script> <!-- Collegamento allo script JavaScript -->
 </head>
 
 <body>
 
     <div class="header">
-        <h1>Vendita Auto e Ricambi</h1>
-        <p>Benvenuti nel nostro sito di vendita auto e ricambi</p>
+        <h1>Vendita Auto e Ricambi</h1> <!-- Intestazione del sito -->
+        <p>Benvenuti nel nostro sito di vendita auto e ricambi</p> <!-- Descrizione breve -->
     </div>
 
     <div class="navbar">
-        <a href="index.html">Home</a>
-        <a href="auto.html">Auto</a>
-        <a href="ricambi.html">Ricambi</a>
-        <a href="upload.html" class="active upload-link">Upload</a>
-        <a href="transazioni.html" class="transazioni">Transazioni</a>
+        <a href="index.html">Home</a> <!-- Link alla pagina Home -->
+        <a href="auto.html">Auto</a> <!-- Link alla pagina Auto -->
+        <a href="ricambi.html">Ricambi</a> <!-- Link alla pagina Ricambi -->
+        <a href="upload.html" class="active upload-link">Upload</a> <!-- Link alla pagina di Upload, attiva -->
+        <a href="transazioni.html" class="transazioni">Transazioni</a> <!-- Link alla pagina Transazioni -->
         <a href="login.html" class="right" id="loginLink">Login</a>
+        <!-- Link alla pagina di Login, posizionato a destra -->
     </div>
 
     <div class="row">
         <div class="accesso-form">
-            <h1 class="titolo">Crea inserzione Auto</h1>
+            <h1 class="titolo">Crea inserzione Auto</h1> <!-- Titolo del form per l'inserimento delle auto -->
             <form action="http://localhost:3000/upload-macchine" method="post">
+                <!-- Form per caricare i dati dell'auto -->
                 Marca
                 <input name="marca" type="text" class="accesso-input" id="marca" placeholder="Fiat" required />
+                <!-- Campo per la marca dell'auto -->
                 <br><br>
                 Modello
                 <input name="modello" type="text" class="accesso-input" id="modello" placeholder="Punto" required />
+                <!-- Campo per il modello dell'auto -->
                 <br><br>
                 Descrizione
                 <input name="descrizione" type="text" class="accesso-input" id="descrizione" placeholder="Descrizione"
-                    required />
+                    required /> <!-- Campo per la descrizione dell'auto -->
                 <br><br>
                 Anno:
                 <input id="anno" name="anno" type="number" class="accesso-input" min="1900" max="2099" step="1"
-                    value="2016" required />
+                    value="2016" required /> <!-- Campo per l'anno di produzione dell'auto -->
                 <br><br>
                 KM:
                 <input id="kilometri" name="kilometri" type="number" class="accesso-input" min="0" max="5000000"
-                    step="1" value="35000" required />
+                    step="1" value="35000" required /> <!-- Campo per i chilometri percorsi dall'auto -->
                 <br><br>
-                <br><br>
+                Stato:
                 <input type="radio" name="stato" value="Nuova" required>
                 <label for="nuova">Nuova</label>
                 <input type="radio" name="stato" value="Usata" required>
-                <label for="usata">Usata</label><br><br>
-                <br><br>
+                <label for="usata">Usata</label><br><br> <!-- Opzioni per lo stato dell'auto (Nuova o Usata) -->
                 Prezzo:
                 <input id="prezzo" name="prezzo" type="number" class="accesso-input" min="0" step="1" value="25000"
-                    required />
+                    required /> <!-- Campo per il prezzo dell'auto -->
                 <br><br>
-                <input type="submit" value="Invia" class="accesso-invia" />
+                <input type="submit" value="Invia" class="accesso-invia" /> <!-- Pulsante per inviare i dati -->
             </form>
         </div>
 
         <div class="accesso-form">
-            <h1 class="titolo">Crea inserzione Ricambi</h1>
+            <h1 class="titolo">Crea inserzione Ricambi</h1> <!-- Titolo del form per l'inserimento dei ricambi -->
             <form action="http://localhost:3000/upload-ricambi" method="post">
+                <!-- Form per caricare i dati del ricambio -->
                 Marca
                 <input name="marca" type="text" class="accesso-input" id="marca" placeholder="Fiat" required />
+                <!-- Campo per la marca del ricambio -->
                 <br><br>
                 Modello
                 <input name="modello" type="text" class="accesso-input" id="modello" placeholder="Punto" required />
+                <!-- Campo per il modello del ricambio -->
                 <br><br>
                 Descrizione
                 <input name="descrizione" type="text" class="accesso-input" id="descrizione" placeholder="Descrizione"
-                    required />
+                    required /> <!-- Campo per la descrizione del ricambio -->
                 <br><br>
-                <br><br>
+                Stato:
                 <input type="radio" name="stato" value="Nuova" required>
                 <label for="nuova">Nuovo</label>
                 <input type="radio" name="stato" value="Usata" required>
-                <label for="usata">Usato</label><br><br>
-                <br><br>
+                <label for="usata">Usato</label><br><br> <!-- Opzioni per lo stato del ricambio (Nuovo o Usato) -->
                 Prezzo:
                 <input id="prezzo" name="prezzo" type="number" class="accesso-input" min="0" step="1" value="25000"
-                    required />
+                    required /> <!-- Campo per il prezzo del ricambio -->
                 <br><br>
-                <input type="submit" value="Invia" class="accesso-invia" />
+                <input type="submit" value="Invia" class="accesso-invia" /> <!-- Pulsante per inviare i dati -->
             </form>
         </div>
     </div>
 
     <div class="footer">
-        <h2>Contattaci</h2>
-        <p>Email: info@sdep.com</p>
-        <p>Telefono: 123-456-7890</p>
-        <p>Indirizzo: Via delle Auto, 123, 00100 Roma, Italia</p>
+        <h2>Contattaci</h2> <!-- Titolo della sezione Contattaci -->
+        <p>Email: info@sdep.com</p> <!-- Indirizzo email di contatto -->
+        <p>Telefono: 123-456-7890</p> <!-- Numero di telefono di contatto -->
+        <p>Indirizzo: Via delle Auto, 123, 00100 Roma, Italia</p> <!-- Indirizzo della sede -->
     </div>
 
 </body>
