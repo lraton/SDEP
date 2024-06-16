@@ -1,0 +1,59 @@
+[
+    {
+        "id": 1,
+        "venditore": "antonio",
+        "cliente": "mario",
+        "macchina": {
+            "id": 1,
+            "marca": "FIAT",
+            "modello": "Punto",
+            "descrizione": "Bellissima punto rosa shock in vendita",
+            "stato": "nuova"
+        },
+        "ricambio": {
+            "id": null,
+            "marca": null,
+            "modello": null,
+            "descrizione": null,
+            "stato": null
+        }
+    },
+    {
+        "id": 4,
+        "venditore": "antonio",
+        "cliente": "mario",
+        "macchina": {
+            "id": 2,
+            "marca": "Fiat",
+            "modello": "Panda",
+            "descrizione": "Bellissima pandalmare",
+            "stato": "Nuova"
+        },
+        "ricambio": {
+            "id": null,
+            "marca": null,
+            "modello": null,
+            "descrizione": null,
+            "stato": null
+        }
+    },
+    {
+        "id": 5,
+        "venditore": "antonio",
+        "cliente": "mario",
+        "macchina": {
+            "id": null,
+            "marca": null,
+            "modello": null,
+            "descrizione": null,
+            "stato": null
+        },
+        "ricambio": {
+            "id": 1,
+            "marca": "ALFA ROMEO",
+            "modello": "GIulietta",
+            "descrizione": "è un tubo",
+            "stato": "usato"
+        }
+    }
+]

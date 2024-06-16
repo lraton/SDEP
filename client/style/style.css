@@ -198,7 +198,7 @@ input[type=radio] {
     /* Per posizionare correttamente il pulsante di acquisto */
 }
 
-.venduta{
+.venduta {
     background-color: gray;
 }
 
@@ -218,6 +218,33 @@ input[type=radio] {
     background-color: var(--color-blu3);
 }
 
+
+.transazioni-table {
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.transazioni-table th,
+.transazioni-table td {
+    border: 1px solid var(--color-blu2);
+    padding: 8px;
+    text-align: left;
+    background-color: var(--color-blu4);
+    border-radius: 8px; /* Adjust the value to change the roundness */
+}
+
+.transazioni-table th {
+    background-color: var(--color-blu3);
+    color: white;
+}
+
+.transazioni-table tr:nth-child(even) {
+    background-color: var(--color-blu5);
+    padding: 8px;
+    text-align: left;
+    background-color: var(--color-blu4);
+    border-radius: 8px; /* Adjust the value to change the roundness */
+}
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {

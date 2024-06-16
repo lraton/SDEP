@@ -22,7 +22,10 @@ con.connect(function (err) {
   console.log("Connected to the database!");
 });
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost', // Replace with your frontend origin
+  credentials: true, // Allow cookies from the frontend
+}));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -339,8 +342,9 @@ app.post('/buy-ricambi', (req, res) => {
 });
 
 app.get('/transazioni', (req, res) => {
+  console.log('body:', req.body);
   const username = req.cookies.username; // Assume che il cookie username sia stato impostato correttamente durante il login
-
+  console.log('Username:', username);
   // Query SQL per recuperare le transazioni dell'utente come venditore o cliente
   const sql = `
     SELECT t.id, t.venditore, t.cliente, t.\`id-macchine-vendita\`, t.\`id-ricambi-vendita\`, 
@@ -388,7 +392,7 @@ app.get('/transazioni', (req, res) => {
       return transazione;
     });
 
-    res.json(transazioni);
+    res.status(200).json(transazioni);
   });
 });
 
