@@ -1,3 +1,6 @@
+#SDEP
+Progetto SISTEMI DISTRIBUITI E PARALLELI Unipg
+
 ## Come avviare il sito in locale
 Eseguire questo comando:
 `sudo docker-compose up -d`
